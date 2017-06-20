@@ -134,6 +134,28 @@ public class Demo {
         }
         System.out.println("-------使用配置文件查询数据");
         */
+        //使用动态sql语句查询数据
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("name","Tom");
+       // map.put("score",11);
+        //map.put("address","北京市都是");
+
+        map.put("id",new int[]{1,13,15,17});
+        List<Student> list = stu.querd(map);
+        for(Student s:list){
+            System.out.println(s.getName()+"     " +  s.getScore()+"    "+s.getAddress()+"   "+s.getId());
+        }
+
+
+
+        //使用动态sql语句修改数据
+        /*
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("name","决定分开");
+        map.put("id",22);
+        int i = stu.upd(map);
+        System.out.println(i+"   使用动态sql语句修改数据");
+        */
 
 
     }

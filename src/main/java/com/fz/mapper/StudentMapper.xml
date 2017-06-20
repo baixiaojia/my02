@@ -54,7 +54,42 @@
     </select>
     <!--使用配置文件查询数据-->
     <select id="quer" resultMap="sk">
-        select * from student where 1=1
+        select * from student where 1 = 1
     </select>
 
+    <!--动态sql语句 查询-->
+    <select id="querd" resultMap="sk">
+      select * from student
+      <trim prefix="where" prefixOverrides="and|or">
+          <if test="name!=null">
+              and s_name=#{name}
+          </if>
+          <if test="id!=null">
+              and id in
+              <foreach collection="id" open="(" close=")" separator="," item="ids">
+                  #{ids}
+              </foreach>
+          </if>
+
+      </trim>
+    </select>
+
+    <!--使用动态sql语句修改数据-->
+    <update id="upd" parameterType="map">
+        update student
+        <set>
+            <if test='name!=null and !"".equals(name)'>
+                s_name=#{name},
+            </if>
+            <if test="score!=null">
+                s_score=#{score},
+            </if>
+        </set>
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+
+        </where>
+    </update>
 	</mapper>

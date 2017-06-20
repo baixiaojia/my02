@@ -38,5 +38,12 @@ public interface StudentMapper {
     public List<Student> quname(String name);
     //使用配置文件查询数据
     public List<Student> quer();
+    //动态sql语句查询数据
+    public List<Student> querd(Map<String,Object> map);
+
+    //动态sql语句修改数据
+    public int upd(Map<String,Object> map);
+
+
 
 }
